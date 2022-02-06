@@ -37,21 +37,25 @@ def toggle_task(id: int) -> str:
     query = f"SELECT * FROM tasks WHERE ID={id};"
     cursor = list(c.execute(query))
     if not cursor:
-        return "That task was not found."
+        return "That task was not found.\n"
     is_complete = bool(cursor[0][2])
     query = f'''UPDATE tasks
     SET IS_COMPLETE={int(not is_complete)}
     WHERE id={id};
     '''
+    c.execute(query)
     c.commit()
-    return "Task state updated."
+    return "Task state updated.\n"
 
 def delete_task(id: int) -> str:
     """ Deletes a task. """
     query = f"SELECT * FROM tasks WHERE ID={id};"
     cursor = list(c.execute(query))
     if not cursor:
-        return "That task was not found."
+        return "That task was not found.\n"
     query = f"DELETE FROM tasks WHERE ID={id};"
+    c.execute(query)
+    c.commit()
+    return "Task deleted.\n"
 
 create_table()
