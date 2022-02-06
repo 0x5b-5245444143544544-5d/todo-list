@@ -1,21 +1,21 @@
 from utils import database
 
-choices = {
-    'a': add_task,
-    'b': modify_incomplete_tasks,
-    'c': modify_complete_tasks
-}
-
 def add_task():
     task = input("\nEnter task particulars: ")
-    database.add_reminder(task)
-    print("Task added.")
+    database.add_task(task)
+    print("Task added.\n\n")
 
 def modify_incomplete_tasks():
     """ TODO """
 
 def modify_complete_tasks():
     """ TODO """
+
+choices = {
+    'a': add_task,
+    'b': modify_incomplete_tasks,
+    'c': modify_complete_tasks
+}
 
 while True:
     print("Menu")
@@ -29,7 +29,6 @@ while True:
     choice = choice[0].lower()
     if not choice in choices.keys():
         print("Quitting!")
-        break 
-    choice_dict[choice]()
+        break
 
-
+    choices[choice]()

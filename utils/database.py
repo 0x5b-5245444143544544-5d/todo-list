@@ -6,7 +6,7 @@ c = sqlite3.connect('data.db')
 def create_table() -> None:
     """ Creates table for use by the application. """
     query = '''CREATE TABLE tasks
-    (ID INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+    (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     TODO_CONTENT TEXT NOT NULL,
     IS_COMPLETE INTEGER NOT NULL DEFAULT FALSE);'''
     c.execute(query)
@@ -14,7 +14,7 @@ def create_table() -> None:
 
 def add_task(reminder_text: str) -> None:
     """ Adds a tasks to the database. """
-    query = f'INSERT INTO tasks (TODO_CONTENT) values ({reminder_text});'
+    query = f'INSERT INTO tasks (TODO_CONTENT) values (\"{reminder_text}\");'
     c.execute(query)
     c.commit()
 
