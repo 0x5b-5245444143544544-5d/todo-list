@@ -32,7 +32,26 @@ def get_tasks(is_complete: bool) -> list:
         })
     return response
 
-def modify_task(id: int, is_complete: bool) -> None:
+def toggle_task(id: int) -> str:
     """ Toggle whether task is complete or not. """
+    query = f"SELECT * FROM tasks WHERE ID={id};"
+    cursor = list(c.execute(query))
+    if not cursor:
+        return "That task was not found."
+    is_complete = bool(cursor[0][2])
+    query = f'''UPDATE tasks
+    SET IS_COMPLETE={int(not is_complete)}
+    WHERE id={id};
+    '''
+    c.commit()
+    return "Task state updated."
+
+def delete_task(id: int) -> str:
+    """ Deletes a task. """
+    query = f"SELECT * FROM tasks WHERE ID={id};"
+    cursor = list(c.execute(query))
+    if not cursor:
+        return "That task was not found."
+    query = f"DELETE FROM tasks WHERE ID={id};"
 
 create_table()
