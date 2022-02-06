@@ -1,5 +1,5 @@
 # todo-list
-A CLI application to store your todo list.
+A CLI application to manage your todo list.
 
 ## How to use?
 1. Install prerequisites by running:
